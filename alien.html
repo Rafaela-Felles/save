@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ALIEN STAGE — Beyond The Stars</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #05030b;
+            color: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* ESTRELAS */
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 20;
+
+            background-image:
+                radial-gradient(#fff 1px, transparent 1px),
+                radial-gradient(#8d5cff 1px, transparent 1px);
+
+            background-size: 90px 90px, 140px 140px;
+            background-position: 0 0, 40px 60px;
+
+            opacity: .25;
+        }
+
+        /* NAVBAR */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 22px 8%;
+
+            background: rgba(5, 3, 11, .75);
+            backdrop-filter: blur(15px);
+
+            border-bottom: 1px solid rgba(160, 100, 255, .25);
+
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 900;
+            letter-spacing: 5px;
+
+            color: #fff;
+
+            text-shadow:
+                0 0 10px #8f4dff,
+                0 0 30px #7a35ff;
+        }
+
+        .logo span {
+            color: #a96cff;
+        }
+
+        nav {
+            display: flex;
+            gap: 35px;
+        }
+
+        nav a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 2px;
+            transition: .3s;
+        }
+
+        nav a:hover {
+            color: #d19cff;
+            text-shadow: 0 0 15px #a14cff;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 100vh;
+
+            position: relative;
+
+            display: flex;
+            align-items: center;
+
+            padding: 130px 8% 80px;
+
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 70% 45%,
+                    rgba(121, 44, 255, .35),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 20% 80%,
+                    rgba(255, 45, 181, .15),
+                    transparent 30%
+                ),
+                #05030b;
+        }
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+
+            width: 600px;
+            height: 600px;
+
+            right: -200px;
+            top: 100px;
+
+            border-radius: 50%;
+
+            background: #8338ff;
+
+            filter: blur(180px);
+
+            opacity: .2;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .subtitle {
+            color: #b875ff;
+            letter-spacing: 7px;
+            font-size: 13px;
+            margin-bottom: 25px;
+
+            animation: glow 2s infinite alternate;
+        }
+
+        .hero h1 {
+            font-size: clamp(65px, 11vw, 145px);
+            line-height: .78;
+            font-weight: 900;
+            letter-spacing: -7px;
+
+            text-transform: uppercase;
+
+            text-shadow:
+                0 0 20px rgba(157, 75, 255, .5),
+                5px 5px 0 #271043;
+        }
+
+        .hero h1 span {
+            color: #a45cff;
+
+            text-shadow:
+                0 0 15px #8b3dff,
+                0 0 45px #6b1dff;
+        }
+
+        .hero p {
+            max-width: 570px;
+
+            color: #a8a1b5;
+
+            line-height: 1.8;
+
+            margin-top: 35px;
+
+            font-size: 17px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 35px;
+        }
+
+        .btn {
+            padding: 16px 32px;
+
+            text-decoration: none;
+
+            color: white;
+
+            border: 1px solid #8f4dff;
+
+            letter-spacing: 2px;
+
+            font-weight: bold;
+
+            transition: .3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(
+                135deg,
+                #7d31ff,
+                #bd4dff
+            );
+
+            box-shadow:
+                0 0 20px rgba(139, 62, 255, .35);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 0 30px rgba(160, 70, 255, .7);
+        }
+
+        /* PLANETA */
+
+        .planet {
+            position: absolute;
+
+            width: 420px;
+            height: 420px;
+
+            right: 8%;
+            top: 25%;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle at 30% 30%,
+                    #d7a9ff,
+                    #6c25aa 30%,
+                    #1c0c35 70%
+                );
+
+            box-shadow:
+                inset -40px -30px 70px #000,
+                0 0 50px rgba(150, 70, 255, .5);
+
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .planet::before {
+            content: "";
+
+            position: absolute;
+
+            width: 600px;
+            height: 130px;
+
+            left: -90px;
+            top: 145px;
+
+            border: 3px solid rgba(211, 157, 255, .55);
+
+            border-radius: 50%;
+
+            transform: rotate(-15deg);
+
+            box-shadow:
+                0 0 20px #a85cff;
+        }
+
+        .planet::after {
+            content: "✦";
+
+            position: absolute;
+
+            color: white;
+
+            font-size: 30px;
+
+            top: 70px;
+            right: 60px;
+
+            text-shadow:
+                0 0 15px white,
+                0 0 30px #c57cff;
+        }
+
+        /* SEÇÕES */
+
+        section {
+            padding: 110px 8%;
+
+            border-top:
+                1px solid rgba(150, 90, 255, .15);
+        }
+
+        .section-title {
+            margin-bottom: 55px;
+        }
+
+        .section-title small {
+            color: #b66cff;
+
+            letter-spacing: 5px;
+        }
+
+        .section-title h2 {
+            margin-top: 12px;
+
+            font-size: 55px;
+
+            text-transform: uppercase;
+
+            text-shadow:
+                0 0 20px rgba(160, 70, 255, .4);
+        }
+
+        /* ARTISTAS */
+
+        .artists {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 20px;
+        }
+
+        .artist {
+            height: 390px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            border: 1px solid #2a1942;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #181025,
+                    #08050e
+                );
+
+            transition: .4s;
+        }
+
+        .artist:hover {
+            transform: translateY(-10px);
+
+            border-color: #a45cff;
+
+            box-shadow:
+                0 20px 50px
+                rgba(137, 50, 255, .25);
+        }
+
+        .artist-image {
+            height: 70%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 100px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    #7839b8,
+                    transparent 65%
+                );
+        }
+
+        .artist:nth-child(2) .artist-image {
+            background:
+                radial-gradient(
+                    circle,
+                    #b73583,
+                    transparent 65%
+                );
+        }
+
+        .artist:nth-child(3) .artist-image {
+            background:
+                radial-gradient(
+                    circle,
+                    #3155b8,
+                    transparent 65%
+                );
+        }
+
+        .artist:nth-child(4) .artist-image {
+            background:
+                radial-gradient(
+                    circle,
+                    #b66b35,
+                    transparent 65%
+                );
+        }
+
+        .artist-info {
+            padding: 20px;
+        }
+
+        .artist-info h3 {
+            font-size: 25px;
+            letter-spacing: 3px;
+        }
+
+        .artist-info p {
+            color: #877d96;
+            margin-top: 7px;
+        }
+
+        /* STAGE */
+
+        .stage {
+            min-height: 550px;
+
+            position: relative;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    ellipse at center,
+                    #51219b,
+                    #0c0615 60%
+                );
+
+            border: 1px solid #382055;
+        }
+
+        .stage-light {
+            position: absolute;
+
+            width: 300px;
+            height: 700px;
+
+            top: -150px;
+
+            background:
+                linear-gradient(
+                    transparent,
+                    rgba(190, 100, 255, .35),
+                    transparent
+                );
+
+            filter: blur(20px);
+
+            transform: rotate(25deg);
+
+            animation: lights 5s infinite alternate;
+        }
+
+        .stage-light:nth-child(2) {
+            transform: rotate(-25deg);
+            animation-delay: 1s;
+        }
+
+        .stage-title {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stage-title h2 {
+            font-size: clamp(50px, 8vw, 100px);
+
+            letter-spacing: 10px;
+
+            text-shadow:
+                0 0 20px #9b4dff,
+                0 0 50px #7225ff;
+        }
+
+        .stage-title p {
+            color: #c8b9d8;
+            margin-top: 15px;
+            letter-spacing: 5px;
+        }
+
+        /* MÚSICA */
+
+        .music-player {
+            max-width: 900px;
+
+            padding: 30px;
+
+            border: 1px solid #392052;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #10091a,
+                    #07040c
+                );
+
+            box-shadow:
+                0 0 40px rgba(121, 52, 255, .1);
+        }
+
+        .track {
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+
+            padding: 20px;
+
+            border-bottom: 1px solid #21132e;
+
+            transition: .3s;
+        }
+
+        .track:hover {
+            background: rgba(154, 78, 255, .08);
+        }
+
+        .track-number {
+            color: #a45cff;
+            font-weight: bold;
+            width: 30px;
+        }
+
+        .track-name {
+            flex: 1;
+        }
+
+        .track-name strong {
+            display: block;
+            letter-spacing: 2px;
+        }
+
+        .track-name small {
+            color: #756b81;
+        }
+
+        .play {
+            width: 40px;
+            height: 40px;
+
+            border-radius: 50%;
+
+            border: 1px solid #a45cff;
+
+            background: transparent;
+
+            color: #fff;
+
+            cursor: pointer;
+
+            transition: .3s;
+        }
+
+        .play:hover {
+            background: #9a4dff;
+
+            box-shadow:
+                0 0 20px #8c3dff;
+        }
+
+        /* LORE */
+
+        .lore {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 70px;
+
+            align-items: center;
+        }
+
+        .lore-text p {
+            color: #9b92a6;
+
+            line-height: 1.9;
+
+            margin-bottom: 20px;
+        }
+
+        .quote {
+            padding: 50px;
+
+            border:
+
+                1px solid #62349a;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    #24103e,
+                    #09050e
+                );
+
+            font-size: 28px;
+
+            line-height: 1.5;
+
+            font-style: italic;
+
+            text-align: center;
+
+            box-shadow:
+                0 0 50px
+                rgba(142, 63, 255, .12);
+        }
+
+        .quote span {
+            display: block;
+
+            margin-top: 20px;
+
+            color: #a75cff;
+
+            font-size: 12px;
+
+            letter-spacing: 4px;
+
+            font-style: normal;
+        }
+
+        /* FOOTER */
+
+        footer {
+            padding: 50px 8%;
+
+            text-align: center;
+
+            color: #625a6d;
+
+            border-top:
+                1px solid #21152c;
+        }
+
+        footer strong {
+            color: #a45cff;
+        }
+
+        /* ANIMAÇÕES */
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-25px);
+            }
+        }
+
+        @keyframes glow {
+            from {
+                opacity: .5;
+            }
+
+            to {
+                opacity: 1;
+
+                text-shadow:
+                    0 0 15px #a45cff;
+            }
+        }
+
+        @keyframes lights {
+            from {
+                opacity: .3;
+                transform: rotate(25deg) translateX(-100px);
+            }
+
+            to {
+                opacity: .8;
+                transform: rotate(25deg) translateX(100px);
+            }
+        }
+
+        /* RESPONSIVO */
+
+        @media (max-width: 1000px) {
+
+            .planet {
+                width: 300px;
+                height: 300px;
+
+                right: -100px;
+
+                opacity: .5;
+            }
+
+            .artists {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .lore {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            header {
+                padding: 18px 5%;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero {
+                padding-left: 5%;
+                padding-right: 5%;
+            }
+
+            .hero h1 {
+                font-size: 65px;
+            }
+
+            .planet {
+                width: 250px;
+                height: 250px;
+
+                right: -120px;
+                top: 30%;
+
+                opacity: .25;
+            }
+
+            section {
+                padding: 75px 5%;
+            }
+
+            .artists {
+                grid-template-columns: 1fr;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+
+            .section-title h2 {
+                font-size: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <header>
+
+        <div class="logo">
+            ALIEN<span>STAGE</span>
+        </div>
+
+        <nav>
+            <a href="#home">HOME</a>
+            <a href="#artists">ARTISTS</a>
+            <a href="#stage">STAGE</a>
+            <a href="#music">MUSIC</a>
+            <a href="#lore">LORE</a>
+        </nav>
+
+    </header>
+
+
+    <!-- HERO -->
+
+    <main>
+
+        <section class="hero" id="home">
+
+            <div class="hero-content">
+
+                <div class="subtitle">
+                    WELCOME TO THE GALAXY
+                </div>
+
+                <h1>
+                    ALIEN<br>
+                    <span>STAGE</span>
+                </h1>
+
+                <p>
+                    Um palco onde música, competição e destino
+                    se encontram sob as luzes de uma galáxia
+                    que nunca dorme.
+                </p>
+
+                <div class="buttons">
+
+                    <a
+                        href="#artists"
+                        class="btn btn-primary"
+                    >
+                        EXPLORE
+                    </a>
+
+                    <a
+                        href="#music"
+                        class="btn"
+                    >
+                        LISTEN
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="planet"></div>
+
+        </section>
+
+
+        <!-- ARTISTAS -->
+
+        <section id="artists">
+
+            <div class="section-title">
+
+                <small>
+                    THE PERFORMERS
+                </small>
+
+                <h2>
+                    ARTISTS
+                </h2>
+
+            </div>
+
+            <div class="artists">
+
+                <div class="artist">
+
+                    <div class="artist-image">
+                        ♫
+                    </div>
+
+                    <div class="artist-info">
+
+                        <h3>IVAN</h3>
+
+                        <p>
+                            The Silent Star
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="artist">
+
+                    <div class="artist-image">
+                        ♫
+                    </div>
+
+                    <div class="artist-info">
+
+                        <h3>MIZI</h3>
+
+                        <p>
+                            The Shining Voice
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="artist">
+
+                    <div class="artist-image">
+                        ♫
+                    </div>
+
+                    <div class="artist-info">
+
+                        <h3>TILL</h3>
+
+                        <p>
+                            The Rebel
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="artist">
+
+                    <div class="artist-image">
+                        ♫
+                    </div>
+
+                    <div class="artist-info">
+
+                        <h3>LUKA</h3>
+
+                        <p>
+                            The Performer
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- STAGE -->
+
+        <section id="stage">
+
+            <div class="section-title">
+
+                <small>
+                    THE MAIN ARENA
+                </small>
+
+                <h2>
+                    THE STAGE
+                </h2>
+
+            </div>
+
+            <div class="stage">
+
+                <div class="stage-light"></div>
+                <div class="stage-light"></div>
+
+                <div class="stage-title">
+
+                    <h2>
+                        SING
+                    </h2>
+
+                    <p>
+                        SURVIVE · PERFORM · SHINE
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MUSIC -->
+
+        <section id="music">
+
+            <div class="section-title">
+
+                <small>
+                    SOUND OF THE STARS
+                </small>
+
+                <h2>
+                    MUSIC
+                </h2>
+
+            </div>
+
+            <div class="music-player">
+
+                <div class="track">
+
+                    <div class="track-number">
+                        01
+                    </div>
+
+                    <div class="track-name">
+
+                        <strong>
+                            MY CLEMATIS
+                        </strong>
+
+                        <small>
+                            ALIEN STAGE
+                        </small>
+
+                    </div>
+
+                    <button class="play">
+                        ▶
+                    </button>
+
+                </div>
+
+
+                <div class="track">
+
+                    <div class="track-number">
+                        02
+                    </div>
+
+                    <div class="track-name">
+
+                        <strong>
+                            BLACK SORROW
+                        </strong>
+
+                        <small>
+                            ALIEN STAGE
+                        </small>
+
+                    </div>
+
+                    <button class="play">
+                        ▶
+                    </button>
+
+                </div>
+
+
+                <div class="track">
+
+                    <div class="track-number">
+                        03
+                    </div>
+
+                    <div class="track-name">
+
+                        <strong>
+                            RULER OF MY HEART
+                        </strong>
+
+                        <small>
+                            ALIEN STAGE
+                        </small>
+
+                    </div>
+
+                    <button class="play">
+                        ▶
+                    </button>
+
+                </div>
+
+
+                <div class="track">
+
+                    <div class="track-number">
+                        04
+                    </div>
+
+                    <div class="track-name">
+
+                        <strong>
+                            UNKNOWN
+                        </strong>
+
+                        <small>
+                            ??? / ???
+                        </small>
+
+                    </div>
+
+                    <button class="play">
+                        ▶
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- LORE -->
+
+        <section id="lore">
+
+            <div class="section-title">
+
+                <small>
+                    BEYOND THE STAGE
+                </small>
+
+                <h2>
+                    THE LORE
+                </h2>
+
+            </div>
+
+            <div class="lore">
+
+                <div class="lore-text">
+
+                    <p>
+                        Em um futuro distante, a humanidade
+                        encontra-se sob o domínio de seres
+                        extraterrestres.
+                    </p>
+
+                    <p>
+                        A música se transforma em espetáculo,
+                        competição e sobrevivência.
+                    </p>
+
+                    <p>
+                        Cada apresentação pode mudar o destino
+                        de quem está no palco.
+                    </p>
+
+                </div>
+
+                <div class="quote">
+
+                    "Even if the stars
+                    are watching..."
+
+                    <span>
+                        ALIEN STAGE
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            ALIEN <strong>STAGE</strong>
+        </p>
+
+        <br>
+
+        <p>
+            Fan-made website concept.
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        // Efeito nos botões de música
+
+        const buttons =
+            document.querySelectorAll(".play");
+
+        buttons.forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    if (button.textContent === "▶") {
+
+                        button.textContent = "Ⅱ";
+
+                        button.style.background =
+                            "#9a4dff";
+
+                    } else {
+
+                        button.textContent = "▶";
+
+                        button.style.background =
+                            "transparent";
+
+                    }
+
+                }
+            );
+
+        });
+
+
+        // Pequeno efeito de movimento no planeta
+
+        document.addEventListener(
+            "mousemove",
+            (event) => {
+
+                const planet =
+                    document.querySelector(".planet");
+
+                const x =
+                    (window.innerWidth / 2 -
+                    event.clientX) / 80;
+
+                const y =
+                    (window.innerHeight / 2 -
+                    event.clientY) / 80;
+
+                planet.style.transform =
+                    `translate(${x}px, ${y}px)`;
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>

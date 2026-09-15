@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mobilex.Store | MM2</title>
+
+    <style>
+
+        /* ==============================
+           RESET
+        ============================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #fff8df;
+            color: #171717;
+            overflow-x: hidden;
+        }
+
+
+        /* ==============================
+           NAVBAR
+        ============================== */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+
+            width: 100%;
+            height: 75px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            background: #ffb900;
+            border-bottom: 4px solid #171717;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: 1000;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: white;
+            -webkit-text-stroke: 1.5px #171717;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #171717;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 800;
+
+            transition: 0.2s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .cart-button {
+            border: 2px solid #171717;
+            background: #171717;
+            color: white;
+
+            padding: 11px 17px;
+
+            border-radius: 12px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .cart-button:hover {
+            background: white;
+            color: #171717;
+            transform: translateY(-2px);
+        }
+
+
+        /* ==============================
+           HERO
+        ============================== */
+
+        .hero {
+            min-height: 650px;
+
+            padding: 70px 8%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            position: relative;
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 80% 30%,
+                    #ffe16b 0%,
+                    transparent 30%
+                ),
+                #ffb900;
+        }
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+
+            width: 500px;
+            height: 500px;
+
+            background: rgba(255,255,255,0.12);
+
+            border-radius: 50%;
+
+            right: -150px;
+            bottom: -200px;
+        }
+
+        .hero-text {
+            width: 52%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .tag {
+            display: inline-block;
+
+            background: #171717;
+            color: white;
+
+            padding: 9px 16px;
+
+            border-radius: 30px;
+
+            font-size: 13px;
+            font-weight: 900;
+
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(55px, 7vw, 95px);
+
+            line-height: 0.88;
+
+            font-weight: 1000;
+
+            text-transform: uppercase;
+
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: white;
+
+            -webkit-text-stroke: 3px #171717;
+        }
+
+        .hero p {
+            max-width: 530px;
+
+            font-size: 18px;
+
+            line-height: 1.6;
+
+            font-weight: 600;
+
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .hero-btn {
+            text-decoration: none;
+
+            padding: 15px 25px;
+
+            border-radius: 13px;
+
+            font-weight: 900;
+
+            transition: 0.25s;
+        }
+
+        .btn-black {
+            background: #171717;
+            color: white;
+        }
+
+        .btn-white {
+            background: white;
+            color: #171717;
+
+            border: 3px solid #171717;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 7px 0 #171717;
+        }
+
+
+        /* ==============================
+           JAKE
+        ============================== */
+
+        .hero-image {
+            width: 45%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-image img {
+            width: min(430px, 90%);
+            max-height: 540px;
+
+            object-fit: contain;
+
+            filter: drop-shadow(
+                15px 18px 0 rgba(0,0,0,0.16)
+            );
+
+            animation: jakeFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes jakeFloat {
+
+            0% {
+                transform: translateY(0) rotate(-2deg);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(2deg);
+            }
+
+            100% {
+                transform: translateY(0) rotate(-2deg);
+            }
+
+        }
+
+
+        /* ==============================
+           PRODUTOS
+        ============================== */
+
+        .products-section {
+            padding: 90px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title .small-title {
+            color: #e69c00;
+
+            font-weight: 900;
+
+            font-size: 13px;
+
+            letter-spacing: 2px;
+        }
+
+        .section-title h2 {
+            font-size: 45px;
+
+            margin-top: 8px;
+
+            font-weight: 1000;
+        }
+
+        .section-title p {
+            color: #777;
+
+            margin-top: 10px;
+        }
+
+
+        /* GRID */
+
+        .products {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 25px;
+        }
+
+
+        /* CARD */
+
+        .product {
+            background: white;
+
+            border: 3px solid #171717;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            box-shadow: 7px 7px 0 #171717;
+
+            transition: 0.25s;
+        }
+
+        .product:hover {
+            transform: translateY(-8px);
+
+            box-shadow:
+                10px 12px 0 #171717;
+        }
+
+
+        /* IMAGEM DO ITEM */
+
+        .product-image {
+            height: 190px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #fff0a8,
+                    #ffd94c
+                );
+
+            font-size: 75px;
+        }
+
+
+        /* INFO */
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .rarity {
+            display: inline-block;
+
+            padding: 5px 10px;
+
+            border-radius: 20px;
+
+            font-size: 10px;
+
+            font-weight: 1000;
+
+            color: white;
+
+            margin-bottom: 10px;
+        }
+
+        .godly {
+            background: #ef3f87;
+        }
+
+        .ancient {
+            background: #7b4cff;
+        }
+
+        .legendary {
+            background: #ff642e;
+        }
+
+        .rare {
+            background: #4388ff;
+        }
+
+        .product h3 {
+            font-size: 21px;
+
+            margin-bottom: 8px;
+        }
+
+        .product-description {
+            color: #888;
+
+            font-size: 13px;
+
+            margin-bottom: 13px;
+        }
+
+        .price {
+            color: #e69c00;
+
+            font-size: 21px;
+
+            font-weight: 1000;
+
+            margin-bottom: 15px;
+        }
+
+        .buy-button {
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #171717;
+
+            color: white;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .buy-button:hover {
+            background: #ffb900;
+
+            color: #171717;
+        }
+
+
+        /* ==============================
+           BANNER
+        ============================== */
+
+        .banner {
+            margin: 0 7% 90px;
+
+            padding: 50px;
+
+            border-radius: 25px;
+
+            background: #171717;
+
+            color: white;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            border: 3px solid #171717;
+        }
+
+        .banner h2 {
+            font-size: 35px;
+
+            margin-bottom: 8px;
+        }
+
+        .banner p {
+            color: #aaa;
+        }
+
+        .banner-button {
+            text-decoration: none;
+
+            background: #ffb900;
+
+            color: #171717;
+
+            padding: 15px 25px;
+
+            border-radius: 13px;
+
+            font-weight: 900;
+
+            transition: 0.2s;
+        }
+
+        .banner-button:hover {
+            background: white;
+
+            transform: scale(1.05);
+        }
+
+
+        /* ==============================
+           COMO FUNCIONA
+        ============================== */
+
+        .how {
+            background: #ffb900;
+
+            padding: 90px 7%;
+
+            text-align: center;
+        }
+
+        .how h2 {
+            font-size: 43px;
+
+            font-weight: 1000;
+
+            margin-bottom: 45px;
+        }
+
+        .steps {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 30px;
+        }
+
+        .step {
+            background: white;
+
+            border: 3px solid #171717;
+
+            border-radius: 20px;
+
+            padding: 35px 25px;
+
+            box-shadow: 6px 6px 0 #171717;
+        }
+
+        .step-number {
+            width: 55px;
+            height: 55px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            margin: 0 auto 20px;
+
+            border-radius: 50%;
+
+            background: #171717;
+
+            color: #ffb900;
+
+            font-size: 23px;
+
+            font-weight: 1000;
+        }
+
+        .step h3 {
+            margin-bottom: 10px;
+
+            font-size: 21px;
+        }
+
+        .step p {
+            color: #777;
+
+            line-height: 1.5;
+        }
+
+
+        /* ==============================
+           FOOTER
+        ============================== */
+
+        footer {
+            background: #171717;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 45px 20px;
+        }
+
+        footer h2 {
+            color: #ffb900;
+
+            font-size: 27px;
+
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            color: #999;
+
+            font-size: 13px;
+
+            margin-top: 5px;
+        }
+
+
+        /* ==============================
+           NOTIFICAÇÃO
+        ============================== */
+
+        .notification {
+            position: fixed;
+
+            right: 25px;
+            bottom: 25px;
+
+            z-index: 9999;
+
+            background: #171717;
+
+            color: white;
+
+            border: 2px solid #ffb900;
+
+            padding: 17px 22px;
+
+            border-radius: 13px;
+
+            font-weight: 800;
+
+            transform: translateY(120px);
+
+            opacity: 0;
+
+            transition: 0.3s;
+        }
+
+        .notification.show {
+            transform: translateY(0);
+
+            opacity: 1;
+        }
+
+
+        /* ==============================
+           MODAL CARRINHO
+        ============================== */
+
+        .cart-modal {
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(0,0,0,0.65);
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            z-index: 9998;
+
+            padding: 20px;
+        }
+
+        .cart-modal.active {
+            display: flex;
+        }
+
+        .cart-box {
+            width: 100%;
+            max-width: 450px;
+
+            background: white;
+
+            border: 3px solid #171717;
+
+            border-radius: 20px;
+
+            padding: 30px;
+
+            box-shadow: 8px 8px 0 #171717;
+        }
+
+        .cart-box h2 {
+            margin-bottom: 20px;
+        }
+
+        .cart-items {
+            min-height: 80px;
+
+            border-radius: 12px;
+
+            background: #fff8df;
+
+            padding: 15px;
+
+            margin-bottom: 20px;
+        }
+
+        .empty {
+            color: #888;
+
+            text-align: center;
+
+            padding: 20px;
+        }
+
+        .close-cart {
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #171717;
+
+            color: white;
+
+            font-weight: 900;
+
+            cursor: pointer;
+        }
+
+
+        /* ==============================
+           RESPONSIVO
+        ============================== */
+
+        @media (max-width: 1050px) {
+
+            .products {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .hero {
+                flex-direction: column;
+
+                text-align: center;
+            }
+
+            .hero-text {
+                width: 100%;
+            }
+
+            .hero p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-image {
+                width: 100%;
+
+                margin-top: 40px;
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            header {
+                padding: 0 5%;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero {
+                padding: 55px 5%;
+            }
+
+            .hero h1 {
+                font-size: 58px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-btn {
+                width: 100%;
+            }
+
+            .products-section {
+                padding: 70px 5%;
+            }
+
+            .products {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title h2 {
+                font-size: 35px;
+            }
+
+            .banner {
+                margin-left: 5%;
+                margin-right: 5%;
+
+                padding: 35px 25px;
+
+                flex-direction: column;
+
+                text-align: center;
+
+                gap: 25px;
+            }
+
+            .banner h2 {
+                font-size: 28px;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =================================
+         NAVBAR
+    ================================== -->
+
+    <header>
+
+        <div class="logo">
+            Mobilex<span>.Store</span>
+        </div>
+
+        <nav>
+
+            <a href="#inicio">
+                Início
+            </a>
+
+            <a href="#loja">
+                Loja
+            </a>
+
+            <a href="#como-funciona">
+                Como funciona
+            </a>
+
+        </nav>
+
+        <button
+            class="cart-button"
+            onclick="abrirCarrinho()"
+        >
+            🛒 Carrinho
+        </button>
+
+    </header>
+
+
+
+    <!-- =================================
+         HERO
+    ================================== -->
+
+    <section
+        class="hero"
+        id="inicio"
+    >
+
+        <div class="hero-text">
+
+            <div class="tag">
+                🔥 MOBILEX.STORE
+            </div>
+
+            <h1>
+                LOJA<br>
+                <span>MM2</span>
+            </h1>
+
+            <p>
+                Bem-vindo à Mobilex.Store!
+                Encontre seus itens favoritos de
+                Murder Mystery 2 em um só lugar.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a
+                    href="#loja"
+                    class="hero-btn btn-black"
+                >
+                    🛒 VER LOJA
+                </a>
+
+                <a
+                    href="#como-funciona"
+                    class="hero-btn btn-white"
+                >
+                    COMO FUNCIONA
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- JAKE -->
+
+        <div class="hero-image">
+
+            <img
+                src="./jake.png"
+                alt="Jake"
+                onerror="mostrarErroImagem()"
+            >
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================
+         PRODUTOS
+    ================================== -->
+
+    <section
+        class="products-section"
+        id="loja"
+    >
+
+        <div class="section-title">
+
+            <div class="small-title">
+                MOBILEX.STORE
+            </div>
+
+            <h2>
+                🔥 ITENS EM DESTAQUE
+            </h2>
+
+            <p>
+                Escolha seu item favorito.
+            </p>
+
+        </div>
+
+
+        <div class="products">
+
+
+            <!-- ITEM 1 -->
+
+            <div class="product">
+
+                <div class="product-image">
+                    🔪
+                </div>
+
+                <div class="product-info">
+
+                    <span class="rarity godly">
+                        GODLY
+                    </span>
+
+                    <h3>
+                        Chroma Knife
+                    </h3>
+
+                    <p class="product-description">
+                        Uma faca extremamente rara.
+                    </p>
+
+                    <div class="price">
+                        R$ 19,90
+                    </div>
+
+                    <button
+                        class="buy-button"
+                        onclick="adicionarCarrinho('Chroma Knife', 'R$ 19,90')"
+                    >
+                        ADICIONAR AO CARRINHO
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ITEM 2 -->
+
+            <div class="product">
+
+                <div class="product-image">
+                    🔫
+                </div>
+
+                <div class="product-info">
+
+                    <span class="rarity ancient">
+                        ANCIENT
+                    </span>
+
+                    <h3>
+                        Ancient Gun
+                    </h3>
+
+                    <p class="product-description">
+                        Uma arma especial para sua coleção.
+                    </p>
+
+                    <div class="price">
+                        R$ 24,90
+                    </div>
+
+                    <button
+                        class="buy-button"
+                        onclick="adicionarCarrinho('Ancient Gun', 'R$ 24,90')"
+                    >
+                        ADICIONAR AO CARRINHO
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ITEM 3 -->
+
+            <div class="product">
+
+                <div class="product-image">
+                    ⚔️
+                </div>
+
+                <div class="product-info">
+
+                    <span class="rarity legendary">
+                        LEGENDARY
+                    </span>
+
+                    <h3>
+                        Fire Blade
+                    </h3>
+
+                    <p class="product-description">
+                        Uma lâmina com visual flamejante.
+                    </p>
+
+                    <div class="price">
+                        R$ 14,90
+                    </div>
+
+                    <button
+                        class="buy-button"
+                        onclick="adicionarCarrinho('Fire Blade', 'R$ 14,90')"
+                    >
+                        ADICIONAR AO CARRINHO
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ITEM 4 -->
+
+            <div class="product">
+
+                <div class="product-image">
+                    🗡️
+                </div>
+
+                <div class="product-info">
+
+                    <span class="rarity rare">
+                        RARE
+                    </span>
+
+                    <h3>
+                        Blue Knife
+                    </h3>
+
+                    <p class="product-description">
+                        Uma faca azul para sua coleção.
+                    </p>
+
+                    <div class="price">
+                        R$ 9,90
+                    </div>
+
+                    <button
+                        class="buy-button"
+                        onclick="adicionarCarrinho('Blue Knife', 'R$ 9,90')"
+                    >
+                        ADICIONAR AO CARRINHO
+                    </button>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================
+         BANNER
+    ================================== -->
+
+    <section class="banner">
+
+        <div>
+
+            <h2>
+                🐶 OFERTA DO JAKE!
+            </h2>
+
+            <p>
+                Confira os itens especiais da Mobilex.Store.
+            </p>
+
+        </div>
+
+        <a
+            href="#loja"
+            class="banner-button"
+        >
+            COMPRAR AGORA
+        </a>
+
+    </section>
+
+
+
+    <!-- =================================
+         COMO FUNCIONA
+    ================================== -->
+
+    <section
+        class="how"
+        id="como-funciona"
+    >
+
+        <h2>
+            COMO FUNCIONA?
+        </h2>
+
+        <div class="steps">
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    1
+                </div>
+
+                <h3>
+                    Escolha seu item
+                </h3>
+
+                <p>
+                    Escolha entre os itens
+                    disponíveis na Mobilex.Store.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    2
+                </div>
+
+                <h3>
+                    Adicione ao carrinho
+                </h3>
+
+                <p>
+                    Clique no botão e coloque
+                    seus itens no carrinho.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    3
+                </div>
+
+                <h3>
+                    Finalize
+                </h3>
+
+                <p>
+                    Confira seus itens e
+                    finalize seu pedido.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================
+         FOOTER
+    ================================== -->
+
+    <footer>
+
+        <h2>
+            Mobilex.Store
+        </h2>
+
+        <p>
+            © 2026 Mobilex.Store
+        </p>
+
+        <p>
+            Loja independente de itens MM2.
+        </p>
+
+    </footer>
+
+
+
+    <!-- =================================
+         NOTIFICAÇÃO
+    ================================== -->
+
+    <div
+        class="notification"
+        id="notification"
+    >
+        Item adicionado!
+    </div>
+
+
+
+    <!-- =================================
+         CARRINHO
+    ================================== -->
+
+    <div
+        class="cart-modal"
+        id="cartModal"
+    >
+
+        <div class="cart-box">
+
+            <h2>
+                🛒 Seu Carrinho
+            </h2>
+
+            <div
+                class="cart-items"
+                id="cartItems"
+            >
+
+                <div class="empty">
+                    Seu carrinho está vazio.
+                </div>
+
+            </div>
+
+            <button
+                class="close-cart"
+                onclick="fecharCarrinho()"
+            >
+                FECHAR
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================
+         JAVASCRIPT
+    ================================== -->
+
+    <script>
+
+        let carrinho = [];
+
+
+        /* ==========================
+           ADICIONAR AO CARRINHO
+        ========================== */
+
+        function adicionarCarrinho(nome, preco) {
+
+            carrinho.push({
+                nome: nome,
+                preco: preco
+            });
+
+            mostrarNotificacao(
+                "✅ " + nome + " adicionado!"
+            );
+
+        }
+
+
+        /* ==========================
+           NOTIFICAÇÃO
+        ========================== */
+
+        function mostrarNotificacao(texto) {
+
+            const notification =
+                document.getElementById(
+                    "notification"
+                );
+
+            notification.innerText = texto;
+
+            notification.classList.add(
+                "show"
+            );
+
+            setTimeout(function() {
+
+                notification.classList.remove(
+                    "show"
+                );
+
+            }, 2500);
+
+        }
+
+
+        /* ==========================
+           ABRIR CARRINHO
+        ========================== */
+
+        function abrirCarrinho() {
+
+            const modal =
+                document.getElementById(
+                    "cartModal"
+                );
+
+            const lista =
+                document.getElementById(
+                    "cartItems"
+                );
+
+
+            if (carrinho.length === 0) {
+
+                lista.innerHTML = `
+                    <div class="empty">
+                        Seu carrinho está vazio.
+                    </div>
+                `;
+
+            } else {
+
+                let html = "";
+
+                carrinho.forEach(
+                    function(item, index) {
+
+                        html += `
+                            <div style="
+                                padding:12px;
+                                margin-bottom:8px;
+                                background:white;
+                                border-radius:10px;
+                                border:2px solid #171717;
+                                display:flex;
+                                justify-content:space-between;
+                                gap:10px;
+                            ">
+
+                                <strong>
+                                    ${item.nome}
+                                </strong>
+
+                                <strong>
+                                    ${item.preco}
+                                </strong>
+
+                            </div>
+                        `;
+
+                    }
+                );
+
+                html += `
+                    <div style="
+                        margin-top:15px;
+                        padding:15px;
+                        background:#ffb900;
+                        border-radius:10px;
+                        font-weight:900;
+                        text-align:center;
+                    ">
+                        ${carrinho.length}
+                        item(ns) no carrinho
+                    </div>
+                `;
+
+                lista.innerHTML = html;
+
+            }
+
+
+            modal.classList.add(
+                "active"
+            );
+
+        }
+
+
+        /* ==========================
+           FECHAR CARRINHO
+        ========================== */
+
+        function fecharCarrinho() {
+
+            document
+                .getElementById("cartModal")
+                .classList.remove("active");
+
+        }
+
+
+        /* ==========================
+           ERRO DA IMAGEM
+        ========================== */
+
+        function mostrarErroImagem() {
+
+            const imagem =
+                document.querySelector(
+                    ".hero-image img"
+                );
+
+            imagem.style.display = "none";
+
+
+            const aviso =
+                document.createElement("div");
+
+            aviso.innerHTML = `
+                <div style="
+                    background:white;
+                    border:3px solid #171717;
+                    border-radius:20px;
+                    padding:25px;
+                    text-align:center;
+                    box-shadow:6px 6px 0 #171717;
+                ">
+                    <strong>
+                        🐶 Jake não encontrado
+                    </strong>
+
+                    <p style="
+                        margin-top:10px;
+                        font-size:13px;
+                    ">
+                        Coloque a imagem como
+                        <br>
+                        <b>jake.png</b>
+                        <br>
+                        na mesma pasta do index.html.
+                    </p>
+                </div>
+            `;
+
+            document
+                .querySelector(".hero-image")
+                .appendChild(aviso);
+
+        }
+
+
+        /* ==========================
+           FECHAR MODAL CLICANDO FORA
+        ========================== */
+
+        document
+            .getElementById("cartModal")
+            .addEventListener(
+                "click",
+                function(event) {
+
+                    if (
+                        event.target === this
+                    ) {
+
+                        fecharCarrinho();
+
+                    }
+
+                }
+            );
+
+    </script>
+
+</body>
+
+</html>

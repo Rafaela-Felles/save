@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FNAF | Five Nights at Freddy's</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #050505;
+            color: #ddd;
+            font-family: Arial, Helvetica, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Efeito de estática */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.08;
+            z-index: 999;
+            background-image:
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    #fff 3px
+                );
+        }
+
+        /* NAVBAR */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.85);
+            border-bottom: 1px solid #8b0000;
+            backdrop-filter: blur(8px);
+        }
+
+        .logo {
+            color: #e5b800;
+            font-size: 25px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px #e5b800;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #aaa;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff1a1a;
+            text-shadow: 0 0 10px red;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 8% 60px;
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 75% 50%, #401010 0%, transparent 35%),
+                linear-gradient(90deg, #030303 30%, #130505 100%);
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            right: -150px;
+            bottom: -200px;
+            border-radius: 50%;
+            background: #ff0000;
+            filter: blur(150px);
+            opacity: 0.12;
+        }
+
+        .hero-content {
+            max-width: 650px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .warning {
+            color: #ff2222;
+            font-size: 14px;
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+            animation: blink 1.5s infinite;
+        }
+
+        .hero h1 {
+            font-size: clamp(55px, 9vw, 110px);
+            line-height: 0.85;
+            color: white;
+            text-transform: uppercase;
+            text-shadow:
+                5px 5px 0 #550000,
+                0 0 25px #ff0000;
+        }
+
+        .hero h1 span {
+            color: #e5b800;
+        }
+
+        .hero p {
+            margin-top: 30px;
+            max-width: 550px;
+            line-height: 1.7;
+            color: #aaa;
+            font-size: 18px;
+        }
+
+        .buttons {
+            margin-top: 35px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: 1px solid #ff1a1a;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: #9b0000;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 25px red;
+        }
+
+        /* OLHOS */
+        .eyes {
+            position: absolute;
+            right: 12%;
+            top: 42%;
+            display: flex;
+            gap: 80px;
+            z-index: 1;
+        }
+
+        .eye {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow:
+                0 0 10px #fff,
+                0 0 30px #ff0000,
+                0 0 70px red;
+            animation: eyeBlink 4s infinite;
+        }
+
+        /* SEÇÃO */
+        section {
+            padding: 100px 8%;
+            border-top: 1px solid #1d1d1d;
+        }
+
+        .section-title {
+            margin-bottom: 50px;
+        }
+
+        .section-title small {
+            color: #ff1a1a;
+            letter-spacing: 4px;
+        }
+
+        .section-title h2 {
+            font-size: 50px;
+            color: white;
+            margin-top: 10px;
+        }
+
+        /* CARDS */
+        .characters {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            position: relative;
+            min-height: 350px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            overflow: hidden;
+            border: 1px solid #292929;
+            background: linear-gradient(
+                180deg,
+                #151515,
+                #050505
+            );
+            transition: 0.4s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: #ff0000;
+            box-shadow: 0 15px 40px rgba(255, 0, 0, 0.25);
+        }
+
+        .card::before {
+            content: "?";
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            font-size: 100px;
+            font-weight: 900;
+            color: #222;
+        }
+
+        .card h3 {
+            font-size: 30px;
+            color: #e5b800;
+            position: relative;
+        }
+
+        .card p {
+            color: #888;
+            margin-top: 8px;
+            position: relative;
+        }
+
+        .freddy::before {
+            content: "🐻";
+        }
+
+        .bonnie::before {
+            content: "🐰";
+        }
+
+        .chica::before {
+            content: "🐤";
+        }
+
+        .foxy::before {
+            content: "🦊";
+        }
+
+        /* CÂMERAS */
+        .camera {
+            background: #030303;
+        }
+
+        .camera-screen {
+            position: relative;
+            height: 450px;
+            border: 2px solid #555;
+            background:
+                linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.8)),
+                repeating-linear-gradient(
+                    0deg,
+                    #161616 0px,
+                    #161616 3px,
+                    #111 4px,
+                    #111 7px
+                );
+            overflow: hidden;
+        }
+
+        .camera-screen::before {
+            content: "CAM 04";
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #ff2222;
+            font-family: monospace;
+            font-size: 20px;
+        }
+
+        .camera-screen::after {
+            content: "● REC";
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: red;
+            font-family: monospace;
+            animation: blink 1s infinite;
+        }
+
+        .camera-info {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: #aaa;
+            font-family: monospace;
+        }
+
+        /* SOBRE */
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+        }
+
+        .about-text p {
+            color: #999;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .quote {
+            padding: 40px;
+            border-left: 4px solid #ff0000;
+            background: #0c0c0c;
+            font-size: 25px;
+            font-style: italic;
+            color: white;
+            box-shadow: inset 0 0 30px rgba(255,0,0,.05);
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 40px 8%;
+            text-align: center;
+            background: #020202;
+            border-top: 1px solid #222;
+            color: #555;
+        }
+
+        footer span {
+            color: #a00000;
+        }
+
+        /* ANIMAÇÕES */
+        @keyframes blink {
+            0%, 40%, 100% {
+                opacity: 1;
+            }
+
+            45%, 55% {
+                opacity: 0.15;
+            }
+        }
+
+        @keyframes eyeBlink {
+            0%, 45%, 48%, 100% {
+                opacity: 1;
+            }
+
+            46%, 47% {
+                opacity: 0;
+            }
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 900px) {
+            .characters {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+            }
+
+            .eyes {
+                opacity: 0.2;
+                right: 5%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 15px 5%;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero {
+                padding-left: 5%;
+                padding-right: 5%;
+            }
+
+            section {
+                padding: 70px 5%;
+            }
+
+            .characters {
+                grid-template-columns: 1fr;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+
+            .camera-screen {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">FAZBEAR'S</div>
+
+        <nav>
+            <a href="#inicio">INÍCIO</a>
+            <a href="#personagens">PERSONAGENS</a>
+            <a href="#camera">CÂMERAS</a>
+            <a href="#sobre">SOBRE</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="hero" id="inicio">
+
+            <div class="hero-content">
+                <div class="warning">⚠ NIGHT SHIFT ACTIVE</div>
+
+                <h1>
+                    FIVE<br>
+                    NIGHTS<br>
+                    <span>AT FREDDY'S</span>
+                </h1>
+
+                <p>
+                    Bem-vindo à Freddy Fazbear's Pizza.
+                    O lugar onde a diversão nunca termina...
+                    pelo menos até as 6 da manhã.
+                </p>
+
+                <div class="buttons">
+                    <a href="#personagens" class="btn btn-primary">
+                        ENTRAR NO TURNO
+                    </a>
+
+                    <a href="#camera" class="btn">
+                        VER CÂMERAS
+                    </a>
+                </div>
+            </div>
+
+            <div class="eyes">
+                <div class="eye"></div>
+                <div class="eye"></div>
+            </div>
+
+        </section>
+
+        <section id="personagens">
+
+            <div class="section-title">
+                <small>THE ANIMATRONICS</small>
+                <h2>PERSONAGENS</h2>
+            </div>
+
+            <div class="characters">
+
+                <div class="card freddy">
+                    <h3>FREDDY</h3>
+                    <p>O rosto da Fazbear Entertainment.</p>
+                </div>
+
+                <div class="card bonnie">
+                    <h3>BONNIE</h3>
+                    <p>O coelho que pode aparecer quando você menos espera.</p>
+                </div>
+
+                <div class="card chica">
+                    <h3>CHICA</h3>
+                    <p>Ela sempre parece estar com fome.</p>
+                </div>
+
+                <div class="card foxy">
+                    <h3>FOXY</h3>
+                    <p>O pirata escondido atrás da cortina.</p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="camera" id="camera">
+
+            <div class="section-title">
+                <small>SECURITY SYSTEM</small>
+                <h2>SISTEMA DE CÂMERAS</h2>
+            </div>
+
+            <div class="camera-screen">
+
+                <div class="camera-info">
+                    POWER: 73%<br>
+                    DOOR: CLOSED<br>
+                    LIGHT: OFF
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="sobre">
+
+            <div class="section-title">
+                <small>THE STORY</small>
+                <h2>SOBRE A PIZZARIA</h2>
+            </div>
+
+            <div class="about">
+
+                <div class="about-text">
+                    <p>
+                        A Freddy Fazbear's Pizza é uma pizzaria familiar
+                        aparentemente comum, famosa por seus animatrônicos
+                        que entretêm as crianças.
+                    </p>
+
+                    <p>
+                        Porém, quando as luzes se apagam, as coisas começam
+                        a ficar um pouco diferentes.
+                    </p>
+
+                    <p>
+                        Seu objetivo é simples: sobreviver ao turno da noite.
+                    </p>
+                </div>
+
+                <div class="quote">
+                    "Remember to smile! You are the face of
+                    Freddy Fazbear's Pizza."
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        FAN SITE — <span>FREDDY FAZBEAR'S PIZZA</span>
+        <br><br>
+        Projeto temático não oficial.
+    </footer>
+
+</body>
+</html>
